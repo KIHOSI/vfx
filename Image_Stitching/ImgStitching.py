@@ -1,9 +1,36 @@
 import numpy as np
 import cv2
+import math
+import random
 
 #warp to cylindrical coordinate
 def WarpToCylindrical(img,f):
-    np.shape(img)
+    print(np.shape(img)) #(512,384,3)
+    (height,width,color) = np.shape(img)
+    img_transformed = np.zeros((height,width,color)) #x,y,f,rgb
+    for x in range(width): #y
+        for y in range(height): #x
+            angle = math.atan((x-192)/f)
+            h = y/math.sqrt(math.pow((x-192),2)+math.pow(f,2))
+            x_new = int(f*angle)
+            y_new = int(f*h) 
+            img_transformed[y_new,x_new+192,:] = img[y,x,:]
+    return img_transformed        
+
+def WANSAC(array): #image stitching : WANSAC
+    n = 6
+    P = 0.99
+    k = 293
+    e = 9 # canculate inliear
+
+    for i in range(k):
+        sample = np.zeros((n))
+        random.shuffle(array)
+        sample = array[:n]
+        other_points = array[n:]
+        sample_model = model.fit(sample)
+        err_threshold = model.get_error(other_points,sample_model)
+        
 
 #main
 images = []
@@ -16,5 +43,9 @@ for i in range(0,18):
         img = cv2.imread('parrington/prtn'+str(i)+'.jpg')
     images.append(img)
 #warp to cylindrical coordinate
+img_cylindrical = np.zeros((17,512,384,3)) #store transformed images (project to cylindrical pos)
 for i in range(0,1):
-    WarpToCylindrical(images[i],focal_length[i])
+    img_cylindrical[i,:,:,:] = WarpToCylindrical(images[i],int(focal_length[i]))
+    cv2.imwrite("test.jpg",img_cylindrical[i])
+
+#image stitching : WANSAC

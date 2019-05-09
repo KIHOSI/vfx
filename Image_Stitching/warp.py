@@ -7,8 +7,8 @@ def WarpToCylindrical(img,f):
     print(np.shape(img)) #(512,384,3)
     (height,width,color) = np.shape(img)
     img_transformed = np.zeros((height,width,color)) #x,y,f,rgb
-    for x in range(width): #y
-        for y in range(height): #x
+    for x in range(width): #x
+        for y in range(height): #y
             angle = math.atan((x-192)/f)
             h = y/math.sqrt(math.pow((x-192),2)+math.pow(f,2))
             x_new = int(f*angle)

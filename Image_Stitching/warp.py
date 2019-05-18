@@ -21,10 +21,7 @@ images = []
 focal_length = [704.916,706.286,705.849,706.645,706.587,705.645,705.327,704.696,703.794,704.325,704.696,703.895,704.289,704.676,704.847,704.537,705.102,705.576]
 #read img
 for i in range(0,18):
-    if(i < 10):
-        img = cv2.imread('parrington/prtn0'+str(i)+'.jpg')
-    else:
-        img = cv2.imread('parrington/prtn'+str(i)+'.jpg')
+    img = cv2.imread('csie/'+str(i)+'.JPG')
     images.append(img)
 #warp to cylindrical coordinate
 img_cylindrical = np.zeros((17,512,384,3)) #store transformed images (project to cylindrical pos)

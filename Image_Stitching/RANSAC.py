@@ -1,6 +1,5 @@
 import numpy as np
 import scipy
-import scipy.linalg
 
 def ransac(data,tranformed_data,model,n,k,t,d,debug=False,return_all=False): 
 #n = 5 要取幾個點, k = 5000 iterations, t = 7e4 threshold for inlier selection, d = 50 numbers of inliers

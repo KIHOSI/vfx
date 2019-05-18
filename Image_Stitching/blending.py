@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 #read image
-img1 = cv2.imread("parrington/prtn01.jpg")
-img2 = cv2.imread("parrington/prtn00.jpg")
+img1 = cv2.imread("csie/0.JPG")
+img2 = cv2.imread("csie/1.JPG")
 
 alpha = 0.5
 beta = 1 - alpha
